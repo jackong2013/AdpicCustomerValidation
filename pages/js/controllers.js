@@ -1,5 +1,5 @@
 angular.module('qnController', [])
-	.controller('mainController', ['$scope', '$http', 'Qns', function ($scope, $http, Qns) {
+	.controller('mainController', ['$scope', '$http', '$location', 'Qns', function ($scope, $http, $location, Qns) {
 		$scope.qnsData = [];
 		$scope.currQn = '';
 		$scope.currIndex = 0;
@@ -19,6 +19,8 @@ angular.module('qnController', [])
 			}
 			$scope.currQn = $scope.qnsData[$scope.currIndex];
 			$scope.firstQn = false;
+			$location.hash('container');
+			$anchorScroll();
 		}
 
 		$scope.prevQn = function () {
@@ -29,6 +31,8 @@ angular.module('qnController', [])
 			}
 			$scope.currQn = $scope.qnsData[$scope.currIndex];
 			$scope.lastQn = false;
+			$location.hash('container');
+			$anchorScroll();
 		}
 
 		$scope.answer = function (qnTitle, qnAnswer) {
@@ -60,6 +64,9 @@ angular.module('qnController', [])
 					for (j in page.data) {
 						var qn = page.data[j];
 						$scope.result[qn.title] = '';
+						if (qn.options.length >= 4) {
+							$scope.qnsData[i].data[j].verticalGroup = "btn-group-vertical";
+						}
 					}
 				}
 			})

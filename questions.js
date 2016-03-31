@@ -20,7 +20,7 @@ var questions = [{
 	}, {
 		title: 'location',
 		question: 'Where is your current location?',
-		options: ['Singapore', 'USA']
+		options: ['Singapore', 'USA', 'Others']
 	}, {
 		title: 'age_group',
 		question: 'Which age group do you fall under?',
