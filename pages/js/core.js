@@ -1,0 +1,1 @@
+angular.module('adpicQns', ['qnController', 'qnService', 'ui.bootstrap']);

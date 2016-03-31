@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Adpic Customer Validation Research</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="/pages/css/main.css">
+
+	<!-- SPELLS -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script> <!-- load angular -->
+
+	<script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script> <!-- load bootstrap -->
+
+	<script type="text/javascript" src="/pages/js/qnService.js"></script> <!-- load our questions service -->
+	<script type="text/javascript" src="/pages/js/controllers.js"></script> <!-- load up our controller -->
+	<script type="text/javascript" src="/pages/js/core.js"></script> <!-- load our main application -->
+</head>
+
+<body ng-app='adpicQns' ng-controller="mainController">
+	<div class="container">
+
+		<!-- Header -->
+		<div class="jumbotron">
+			<h1>Adpic Customer Validation</h1>
+		</div>
+
+		<!-- Questions -->
+		<div ng-hide="submitted">
+			<!-- Division for each question -->
+			<div ng-repeat="qn in currQn.data" class="well">
+
+				<!-- Division for question -->
+				<div class="well">
+					{{ qn.question }}
+				</div>
+
+				<!-- Division for images -->
+				<div class="row row-centered">
+					<div class="col-sm-3 col-centered col-fixed" ng-repeat="img in qn.images">
+						<img class="adpic-images img-thumbnail" src="/pages/img/{{img}}">
+					</div>
+				</div>
+
+				<!-- Division for options -->
+				<div class="btn-group-vertical">
+					<button type="button" class="btn btn-default btn-lg" ng-repeat="opt in qn.options" ng-model="result[qn.title]" uib-btn-radio="opt">{{ opt }}</button>
+				</div>
+
+				<!-- Division for text input -->
+				<div class="form-group" ng-if="!!qn.input">
+					<input type='text' class="form-control" placeholder="{{qn.input}}" ng-model="result[qn.title]">
+				</div>
+			</div>
+
+			<!-- Navigation buttons -->
+			<div class="navigation">
+				<ul class="pager">
+					<li class="previous" ng-click="prevQn()" ng-hide="firstQn"><a href="#">Previous</a></li>
+					<li class="next" ng-click="nextQn()" ng-hide="lastQn"><a href="#">Next</a></li>
+				</ul>
+				<button class="btn btn-success btn-block" ng-click="submit()" ng-show="lastQn">Submit</button>
+			</div>
+		</div>
+		{{ result }}
+
+		<!-- Thank you page upon completion -->
+		<div ng-show="submitted">Thank you!!</div>
+	</div>
+</body>
+</html>
